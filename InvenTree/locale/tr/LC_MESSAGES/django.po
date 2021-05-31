@@ -1,137 +1,136 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: inventree\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-31 20:58+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-05-28 04:02\n"
+"Last-Translator: \n"
+"Language-Team: Turkish\n"
+"Language: tr_TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: inventree\n"
+"X-Crowdin-Project-ID: 452300\n"
+"X-Crowdin-Language: tr\n"
+"X-Crowdin-File: /[inventree.InvenTree] l10/InvenTree/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 138\n"
 
 #: InvenTree/api.py:64
 msgid "API endpoint not found"
-msgstr ""
+msgstr "API uçnoktası bulunmadı"
 
 #: InvenTree/api.py:110
 msgid "No action specified"
-msgstr ""
+msgstr "Hiçbir eylem belirtilmedi"
 
 #: InvenTree/api.py:124
 msgid "No matching action found"
-msgstr ""
+msgstr "Eşleşen eylem bulunamadı"
 
 #: InvenTree/fields.py:44
 msgid "Enter date"
-msgstr ""
+msgstr "Tarih giriniz"
 
 #: InvenTree/forms.py:112 build/forms.py:102 build/forms.py:123
 #: build/forms.py:145 build/forms.py:169 build/forms.py:185 build/forms.py:227
 #: order/forms.py:27 order/forms.py:38 order/forms.py:49 order/forms.py:60
 #: order/forms.py:71 part/forms.py:134
 msgid "Confirm"
-msgstr ""
+msgstr "Onay"
 
 #: InvenTree/forms.py:128
 msgid "Confirm delete"
-msgstr ""
+msgstr "Silmeyi Onayla"
 
 #: InvenTree/forms.py:129
 msgid "Confirm item deletion"
-msgstr ""
+msgstr "Silmeyi onayla"
 
 #: InvenTree/forms.py:161 templates/registration/login.html:76
 msgid "Enter password"
-msgstr ""
+msgstr "Şifrenizi girin"
 
 #: InvenTree/forms.py:162
 msgid "Enter new password"
-msgstr ""
+msgstr "Lütfen Yeni Parolayı Girin"
 
 #: InvenTree/forms.py:169
 msgid "Confirm password"
-msgstr ""
+msgstr "Parolayı doğrulayın"
 
 #: InvenTree/forms.py:170
 msgid "Confirm new password"
-msgstr ""
+msgstr "Yeni parolayı doğrulayın"
 
 #: InvenTree/forms.py:205
 msgid "Apply Theme"
-msgstr ""
+msgstr "Temayı Uygula"
 
 #: InvenTree/forms.py:235
 msgid "Select Category"
-msgstr ""
+msgstr "Kategori Seçin"
 
 #: InvenTree/helpers.py:377
 #, python-brace-format
 msgid "Duplicate serial: {n}"
-msgstr ""
+msgstr "Tekrarlanan seri {n}"
 
 #: InvenTree/helpers.py:384 order/models.py:245 order/models.py:355
 #: stock/views.py:1795
 msgid "Invalid quantity provided"
-msgstr ""
+msgstr "Geçersiz veri sağlandı"
 
 #: InvenTree/helpers.py:387
 msgid "Empty serial number string"
-msgstr ""
+msgstr "Boş seri numarası dizesi"
 
 #: InvenTree/helpers.py:409 InvenTree/helpers.py:412 InvenTree/helpers.py:415
 #: InvenTree/helpers.py:440
 #, python-brace-format
 msgid "Invalid group: {g}"
-msgstr ""
+msgstr "Geçersiz grup: {g}"
 
 #: InvenTree/helpers.py:445
 #, python-brace-format
 msgid "Duplicate serial: {g}"
-msgstr ""
+msgstr "Tekrarlanan seri {g}"
 
 #: InvenTree/helpers.py:453
 msgid "No serial numbers found"
-msgstr ""
+msgstr "Seri numarası bulunamadı"
 
 #: InvenTree/helpers.py:457
 #, python-brace-format
 msgid "Number of unique serial number ({s}) must match quantity ({q})"
-msgstr ""
+msgstr "Benzersiz serinin numaraları ({s}) miktarla eşleşmeli ({q})"
 
 #: InvenTree/models.py:59 stock/models.py:1761
 msgid "Attachment"
-msgstr ""
+msgstr "Ek"
 
 #: InvenTree/models.py:60
 msgid "Select file to attach"
-msgstr ""
+msgstr "Eklenecek dosyayı seç"
 
 #: InvenTree/models.py:62 templates/attachment_table.html:16
 msgid "Comment"
-msgstr ""
+msgstr "Yorum"
 
 #: InvenTree/models.py:62
 msgid "File comment"
-msgstr ""
+msgstr "Yorum"
 
 #: InvenTree/models.py:68 InvenTree/models.py:69 part/models.py:1999
 #: report/templates/report/inventree_test_report_base.html:91
 #: templates/js/stock.js:1147
 msgid "User"
-msgstr ""
+msgstr "Kullanıcı"
 
 #: InvenTree/models.py:72
 msgid "upload date"
-msgstr ""
+msgstr "Yükleme tarihi"
 
 #: InvenTree/models.py:107 InvenTree/models.py:108 label/models.py:102
 #: part/models.py:686 part/models.py:2140 part/templates/part/params.html:27
@@ -139,7 +138,7 @@ msgstr ""
 #: templates/InvenTree/search.html:289 templates/js/part.js:110
 #: templates/js/part.js:633 templates/js/stock.js:940
 msgid "Name"
-msgstr ""
+msgstr "Adı"
 
 #: InvenTree/models.py:114 build/models.py:134
 #: build/templates/build/detail.html:21 company/models.py:339
@@ -162,100 +161,100 @@ msgstr ""
 #: templates/js/stock.js:550 templates/js/stock.js:952
 #: templates/js/stock.js:997
 msgid "Description"
-msgstr ""
+msgstr "Açıklama"
 
 #: InvenTree/models.py:115
 msgid "Description (optional)"
-msgstr ""
+msgstr "Açıklama(opsiyonel)"
 
 #: InvenTree/models.py:123
 msgid "parent"
-msgstr ""
+msgstr "ebeveyn"
 
 #: InvenTree/settings.py:503
 msgid "English"
-msgstr ""
+msgstr "İngilizce"
 
 #: InvenTree/settings.py:504
 msgid "French"
-msgstr ""
+msgstr "Fransızca"
 
 #: InvenTree/settings.py:505
 msgid "German"
-msgstr ""
+msgstr "Almanca"
 
 #: InvenTree/settings.py:506
 msgid "Polish"
-msgstr ""
+msgstr "Polonyaca"
 
 #: InvenTree/settings.py:507
 msgid "Turkish"
-msgstr ""
+msgstr "Türkçe"
 
 #: InvenTree/status.py:93
 msgid "Background worker check failed"
-msgstr ""
+msgstr "Arka plan çalışanı kontrolü başarısız oldu"
 
 #: InvenTree/status.py:97
 msgid "Email backend not configured"
-msgstr ""
+msgstr "E-posta arka ucu yapılandırılmadı"
 
 #: InvenTree/status.py:100
 msgid "InvenTree system health checks failed"
-msgstr ""
+msgstr "InvenTree sistem sağlık kontrolü başarısız"
 
 #: InvenTree/status_codes.py:104 InvenTree/status_codes.py:145
 #: InvenTree/status_codes.py:314
 msgid "Pending"
-msgstr ""
+msgstr "Bekliyor"
 
 #: InvenTree/status_codes.py:105
 msgid "Placed"
-msgstr ""
+msgstr "Sipariş verildi"
 
 #: InvenTree/status_codes.py:106 InvenTree/status_codes.py:317
 msgid "Complete"
-msgstr ""
+msgstr "Tamamlandı"
 
 #: InvenTree/status_codes.py:107 InvenTree/status_codes.py:147
 #: InvenTree/status_codes.py:316
 msgid "Cancelled"
-msgstr ""
+msgstr "İptal edildi"
 
 #: InvenTree/status_codes.py:108 InvenTree/status_codes.py:148
 #: InvenTree/status_codes.py:190
 msgid "Lost"
-msgstr ""
+msgstr "Kayıp"
 
 #: InvenTree/status_codes.py:109 InvenTree/status_codes.py:149
 #: InvenTree/status_codes.py:192
 msgid "Returned"
-msgstr ""
+msgstr "İade"
 
 #: InvenTree/status_codes.py:146
 #: order/templates/order/sales_order_base.html:126
 msgid "Shipped"
-msgstr ""
+msgstr "Sevk edildi"
 
 #: InvenTree/status_codes.py:186
 msgid "OK"
-msgstr ""
+msgstr "TAMAM"
 
 #: InvenTree/status_codes.py:187
 msgid "Attention needed"
-msgstr ""
+msgstr "Dikkat gerekli"
 
 #: InvenTree/status_codes.py:188
 msgid "Damaged"
-msgstr ""
+msgstr "Hasarlı"
 
 #: InvenTree/status_codes.py:189
 msgid "Destroyed"
-msgstr ""
+msgstr "Kullanılamaz durumda"
 
 #: InvenTree/status_codes.py:191
 msgid "Rejected"
-msgstr ""
+msgstr "Reddedildi"
 
 #: InvenTree/status_codes.py:272
 msgid "Legacy stock tracking entry"
@@ -335,20 +334,20 @@ msgstr ""
 
 #: InvenTree/status_codes.py:315
 msgid "Production"
-msgstr ""
+msgstr "Üretim"
 
 #: InvenTree/validators.py:22
 msgid "Not a valid currency code"
-msgstr ""
+msgstr "Geçerli para birimi yok"
 
 #: InvenTree/validators.py:50
 msgid "Invalid character in part name"
-msgstr ""
+msgstr "Parça adında geçersiniz karakter bulunuyor"
 
 #: InvenTree/validators.py:63
 #, python-brace-format
 msgid "IPN must match regex pattern {pat}"
-msgstr ""
+msgstr "IPN regex kalıbıyla eşleşmelidir {pat}"
 
 #: InvenTree/validators.py:77 InvenTree/validators.py:91
 #: InvenTree/validators.py:105
