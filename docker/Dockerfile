@@ -1,8 +1,8 @@
 FROM python:alpine as production
 
 # GitHub source
-ARG repository="https://github.com/inventree/InvenTree.git"
-ARG branch="master"
+ARG repository="https://github.com/sfabris/InvenTree.git"
+ARG branch="old"
 
 ENV PYTHONUNBUFFERED 1
 

@@ -37,7 +37,7 @@ services:
     # Uses gunicorn as the web server
     inventree:
         container_name: inventree
-        image: inventree/inventree:latest
+        image: inventree/inventree:0.2.1
         expose:
             - 8000
         depends_on:
@@ -55,7 +55,7 @@ services:
     # Background worker process handles long-running or periodic tasks
     worker:
         container_name: worker
-        image: inventree/inventree:latest
+        image: inventree/inventree:0.2.1
         entrypoint: ./start_worker.sh
         depends_on:
             - db
@@ -99,6 +99,11 @@ volumes:
             o: bind
             # This directory specified where InvenTree data are stored "outside" the docker containers
             # Change this path to a local system path where you want InvenTree data stored
-            device: /path/to/data
+            device: /mnt/inventree/
     # Static files, shared between containers
     static:
+
+networks:
+  default:
+    external:
+      name: compose_default
