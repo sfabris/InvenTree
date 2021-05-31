@@ -32,38 +32,38 @@ function removeStockRow(e) {
 }
 
 
-function passFailBadge(result) {
+function passFailBadge(result, align='float-right') {
 
     if (result) {
-        return `<span class='label label-green float-right'>{% trans "PASS" %}</span>`;
+        return `<span class='label label-green ${align}'>{% trans "PASS" %}</span>`;
     } else {
-        return `<span class='label label-red float-right'>{% trans "FAIL" %}</span>`;
+        return `<span class='label label-red ${align}'>{% trans "FAIL" %}</span>`;
     }
 }
 
-function noResultBadge() {
-    return `<span class='label label-blue float-right'>{% trans "NO RESULT" %}</span>`;
+function noResultBadge(align='float-right') {
+    return `<span class='label label-blue ${align}'>{% trans "NO RESULT" %}</span>`;
+}
+
+function formatDate(row) {
+    // Function for formatting date field
+    var html = row.date;
+
+    if (row.user_detail) {
+        html += `<span class='badge'>${row.user_detail.username}</span>`;
+    }
+
+    if (row.attachment) {
+        html += `<a href='${row.attachment}'><span class='fas fa-file-alt label-right'></span></a>`;
+    }
+
+    return html;
 }
 
 function loadStockTestResultsTable(table, options) {
     /*
      * Load StockItemTestResult table
      */
-
-    function formatDate(row) {
-        // Function for formatting date field
-        var html = row.date;
-
-        if (row.user_detail) {
-            html += `<span class='badge'>${row.user_detail.username}</span>`;
-        }
-
-        if (row.attachment) {
-            html += `<a href='${row.attachment}'><span class='fas fa-file-alt label-right'></span></a>`;
-        }
-
-        return html;
-    }
 
     function makeButtons(row, grouped) {
         var html = `<div class='btn-group float-right' role='group'>`;
@@ -75,22 +75,33 @@ function loadStockTestResultsTable(table, options) {
             html += makeIconButton('fa-edit icon-blue', 'button-test-edit', pk, '{% trans "Edit test result" %}');
             html += makeIconButton('fa-trash-alt icon-red', 'button-test-delete', pk, '{% trans "Delete test result" %}');
         }
-        
+
         html += "</div>";
 
         return html;
     }
 
-    // First, load all the test templates
     table.inventreeTable({
         url: "{% url 'api-part-test-template-list' %}",
         method: 'get',
         name: 'testresult',
+        treeEnable: true,
+        rootParentId: options.stock_item,
+        parentIdField: 'parent',
+        idField: 'pk',
+        uniqueId: 'pk',
+        treeShowField: 'test_name',
         formatNoMatches: function() {
-            return "{% trans 'No test results found' %}";
+            return '{% trans "No test results found" %}';
         },
         queryParams: {
             part: options.part,
+        },
+        onPostBody: function() {
+            table.treegrid({
+                treeColumn: 0,
+            });
+            table.treegrid("collapseAll");
         },
         columns: [
             {
@@ -130,100 +141,85 @@ function loadStockTestResultsTable(table, options) {
             {
                 field: 'date',
                 title: '{% trans "Test Date" %}',
+                sortable: true,
                 formatter: function(value, row) {
                     return formatDate(row);
-                }
+                },
             },
             {
                 field: 'buttons',
                 formatter: function(value, row) {
                     return makeButtons(row, false);
                 }
-            },
-        ],
-        groupBy: true,
-        groupByField: 'test_name',
-        groupByFormatter: function(field, id, data) {
-
-            // Extract the "latest" row (data are returned in date order from the server)
-            var latest = data[data.length-1];
-
-            switch (field) {
-            case 'test_name':
-                return latest.test_name + ` <i>(${data.length})</i>` + passFailBadge(latest.result);
-            case 'value':
-                return latest.value;
-            case 'notes':
-                return latest.notes;
-            case 'date':
-                return formatDate(latest);
-            case 'buttons':
-                // Buttons are done differently for grouped rows
-                return makeButtons(latest, true);
-            default:
-                return "---";
             }
-        },
+        ],
         onLoadSuccess: function(tableData) {
-            // Once the test template data are loaded, query for results
+
+            // Set "parent" for each existing row
+            tableData.forEach(function(item, idx) {
+                tableData[idx].parent = options.stock_item;
+            });
+
+            // Once the test template data are loaded, query for test results
             inventreeGet(
-                "{% url 'api-stock-test-result-list' %}",
+                '{% url "api-stock-test-result-list" %}',
                 {
                     stock_item: options.stock_item,
                     user_detail: true,
                     attachment_detail: true,
+                    ordering: "-date",
                 },
                 {
                     success: function(data) {
+                        // Iterate through the returned test data
+                        data.forEach(function(item, index) {
 
-                        // Iterate through the returned test result data, and group by test
-                        data.forEach(function(item) {
                             var match = false;
                             var override = false;
 
                             var key = item.key;
 
-                            // Try to associate this result with a test row
+                            // Attempt to associate this result with an existing test
                             tableData.forEach(function(row, index) {
-                                
-                                
-                                // The result matches the test template row
+
                                 if (key == row.key) {
-                                    
-                                    // Force the names to be the same!
+
                                     item.test_name = row.test_name;
                                     item.required = row.required;
 
+                                    match = true;
+                                    
                                     if (row.result == null) {
-                                        // The original row has not recorded a result - override!
+                                        item.parent = options.stock_item;
                                         tableData[index] = item;
                                         override = true;
+                                    } else {
+                                        item.parent = row.pk;
                                     }
-
-                                    match = true;
                                 }
                             });
 
-                            // No match could be found (this is a new test!)
+                            // No match could be found
                             if (!match) {
-
                                 item.test_name = item.test;
+                                item.parent = options.stock_item;
                             }
 
                             if (!override) {
                                 tableData.push(item);
                             }
+
                         });
 
-                        // Finally, push the data back into the table!
+                        // Push data back into the table
                         table.bootstrapTable("load", tableData);
                     }
-                },
-            );
+                }
+            )
         }
     });
-}
 
+}
 
 function loadStockTable(table, options) {
     /* Load data into a stock table with adjustable options.
@@ -250,7 +246,7 @@ function loadStockTable(table, options) {
     var filters = {};
 
     var filterKey = options.filterKey || options.name || "stock";
-     
+
     if (!options.disableFilters) {
         filters = loadTableFilters(filterKey);
     }
@@ -286,7 +282,7 @@ function loadStockTable(table, options) {
 
         // URL (optional)
         var url = '';
-        
+
         if (row.is_building && row.build) {
             // StockItem is currently being built!
             text = '{% trans "In production" %}';
@@ -532,7 +528,7 @@ function loadStockTable(table, options) {
                     var name = row.part_detail.full_name;
 
                     html = imageHoverIcon(thumb) + renderLink(name, url);
-                    
+
                     html += makePartIcons(row.part_detail);
 
                     return html;
@@ -574,7 +570,7 @@ function loadStockTable(table, options) {
                     }
 
                     var html = renderLink(val, `/stock/item/${row.pk}/`);
-                    
+
                     if (row.is_building) {
                         html += makeIconBadge('fa-tools', '{% trans "Stock item is in production" %}');
                     } 
@@ -848,7 +844,7 @@ function loadStockTable(table, options) {
             var status_code = label.val();
 
             closeModal(modal);
-            
+
             if (!status_code) {
                 showAlertDialog(
                     '{% trans "Select Status Code" %}',
@@ -976,42 +972,28 @@ function loadStockLocationTable(table, options) {
 
 function loadStockTrackingTable(table, options) {
 
-    var cols = [
-        {
-            field: 'pk',
-            visible: false,
-        },
-        {
-            field: 'date',
-            title: '{% trans "Date" %}',
-            sortable: true,
-            formatter: function(value, row, index, field) {
-                var m = moment(value);
-                if (m.isValid()) {
-                    var html = m.format('dddd MMMM Do YYYY'); // + '<br>' + m.format('h:mm a');
-                    return html;
-                }
+    var cols = [];
 
-                return 'N/A';
-            }
-        },
-    ];
+    // Date
+    cols.push({
+        field: 'date',
+        title: '{% trans "Date" %}',
+        sortable: true,
+        formatter: function(value, row, index, field) {
+            var m = moment(value);
 
-    // If enabled, provide a link to the referenced StockItem
-    if (options.partColumn) {
-        cols.push({
-            field: 'item',
-            title: '{% trans "Stock Item" %}',
-            sortable: true,
-            formatter: function(value, row, index, field) {
-                return renderLink(value.part_name, value.url);
+            if (m.isValid()) {
+                var html = m.format('dddd MMMM Do YYYY'); // + '<br>' + m.format('h:mm a');
+                return html;
             }
-        });
-    }
+
+            return '<i>{% trans "Invalid date" %}</i>';
+        }
+    });
 
     // Stock transaction description
     cols.push({
-        field: 'title',
+        field: 'label',
         title: '{% trans "Description" %}',
         formatter: function(value, row, index, field) {
             var html = "<b>" + value + "</b>";
@@ -1020,20 +1002,144 @@ function loadStockTrackingTable(table, options) {
                 html += "<br><i>" + row.notes + "</i>";
             }
 
-            if (row.link) {
-                html += "<br><a href='" + row.link + "'>" + row.link + "</a>";
-            }
-
             return html;
         }
     });
 
+    // Stock transaction details
     cols.push({
-        field: 'quantity',
-        title: '{% trans "Quantity" %}',
-        formatter: function(value, row, index, field) {
-            return parseFloat(value);
-        },
+        field: 'deltas',
+        title: '{% trans "Details" %}',
+        formatter: function(details, row, index, field) {
+            var html = `<table class='table table-condensed' id='tracking-table-${row.pk}'>`;
+
+            if (!details) {
+                html += '</table>';
+                return html;
+            }
+
+            // Location information
+            if (details.location) {
+
+                html += `<tr><th>{% trans "Location" %}</th>`;
+
+                html += '<td>';
+
+                if (details.location_detail) {
+                    // A valid location is provided
+
+                    html += renderLink(
+                        details.location_detail.pathstring,
+                        details.location_detail.url,
+                    );
+                } else {
+                    // An invalid location (may have been deleted?)
+                    html += `<i>{% trans "Location no longer exists" %}</i>`;
+                }
+
+                html += '</td></tr>';
+            }
+
+            // Purchase Order Information
+            if (details.purchaseorder) {
+
+                html += `<tr><th>{% trans "Purchase Order" %}</td>`;
+
+                html += '<td>';
+
+                if (details.purchaseorder_detail) {
+                    html += renderLink(
+                        details.purchaseorder_detail.reference,
+                        `/order/purchase-order/${details.purchaseorder}/`
+                    );
+                } else {
+                    html += `<i>{% trans "Purchase order no longer exists" %}</i>`;
+                }
+
+                html += '</td></tr>';
+            }
+
+            // Customer information
+            if (details.customer) {
+
+                html += `<tr><th>{% trans "Customer" %}</td>`;
+
+                html += '<td>';
+
+                if (details.customer_detail) {
+                    html += renderLink(
+                        details.customer_detail.name,
+                        details.customer_detail.url
+                    );
+                } else {
+                    html += `<i>{% trans "Customer no longer exists" %}</i>`;
+                }
+
+                html += '</td></tr>';
+            }
+
+            // Stockitem information
+            if (details.stockitem) {
+                html += '<tr><th>{% trans "Stock Item" %}</td>';
+
+                html += '<td>';
+
+                if (details.stockitem_detail) {
+                    html += renderLink(
+                        details.stockitem,
+                        `/stock/item/${details.stockitem}/`
+                    );
+                } else {
+                    html += `<i>{% trans "Stock item no longer exists" %}</i>`;
+                }
+
+                html += '</td></tr>';
+            }
+
+            // Status information
+            if (details.status) {
+                html += `<tr><th>{% trans "Status" %}</td>`;
+
+                html += '<td>';
+                html += stockStatusDisplay(
+                    details.status,
+                    {
+                        classes: 'float-right',
+                    }
+                );
+                html += '</td></tr>';
+
+            }
+
+            // Quantity information
+            if (details.added) {
+                html += '<tr><th>{% trans "Added" %}</th>';
+
+                html += `<td>${details.added}</td>`;
+
+                html += '</tr>';
+            }
+
+            if (details.removed) {
+                html += '<tr><th>{% trans "Removed" %}</th>';
+
+                html += `<td>${details.removed}</td>`;
+
+                html += '</tr>';
+            }
+
+            if (details.quantity) {
+                html += '<tr><th>{% trans "Quantity" %}</th>';
+
+                html += `<td>${details.quantity}</td>`;
+
+                html += '</tr>';
+            }
+
+            html += '</table>';
+
+            return html;
+        }
     });
 
     cols.push({
@@ -1052,11 +1158,13 @@ function loadStockTrackingTable(table, options) {
         }
     });
 
+    /*
+    // 2021-05-11 - Ability to edit or delete StockItemTracking entries is now removed
     cols.push({
         sortable: false,
         formatter: function(value, row, index, field) {
             // Manually created entries can be edited or deleted
-            if (!row.system) {
+            if (false && !row.system) {
                 var bEdit = "<button title='{% trans 'Edit tracking entry' %}' class='btn btn-entry-edit btn-default btn-glyph' type='button' url='/stock/track/" + row.pk + "/edit/'><span class='fas fa-edit'/></button>";
                 var bDel = "<button title='{% trans 'Delete tracking entry' %}' class='btn btn-entry-delete btn-default btn-glyph' type='button' url='/stock/track/" + row.pk + "/delete/'><span class='fas fa-trash-alt icon-red'/></button>";
 
@@ -1066,6 +1174,7 @@ function loadStockTrackingTable(table, options) {
             }
         }
     });
+    */
 
     table.inventreeTable({
         method: 'get',
@@ -1110,6 +1219,17 @@ function createNewStockItem(options) {
             field: 'part',
             action: function(value) {
 
+                if (!value) {
+                    // No part chosen
+                    
+                    clearFieldOptions('supplier_part');
+                    enableField('serial_numbers', false);
+                    enableField('purchase_price_0', false);
+                    enableField('purchase_price_1', false);
+
+                    return;
+                }
+
                 // Reload options for supplier part
                 reloadFieldOptions(
                     'supplier_part',
@@ -1130,10 +1250,13 @@ function createNewStockItem(options) {
                     `/api/part/${value}/`, {},
                     {
                         success: function(response) {
-                            
+
                             // Disable serial number field if the part is not trackable
                             enableField('serial_numbers', response.trackable);
                             clearField('serial_numbers');
+
+                            enableField('purchase_price_0', response.purchaseable);
+                            enableField('purchase_price_1', response.purchaseable);
 
                             // Populate the expiry date
                             if (response.default_expiry <= 0) {
@@ -1141,7 +1264,7 @@ function createNewStockItem(options) {
                                 clearField('expiry_date');
                             } else {
                                 var expiry = moment().add(response.default_expiry, 'days');
-                                
+
                                 setFieldValue('expiry_date', expiry.format("YYYY-MM-DD"));
                             }
                         }
@@ -1295,7 +1418,7 @@ function loadInstalledInTable(table, options) {
 
                                 // Add some buttons yo!
                                 html += `<div class='btn-group float-right' role='group'>`;
-                                
+
                                 html += makeIconButton('fa-unlink', 'button-uninstall', pk, "{% trans 'Uninstall stock item' %}");
 
                                 html += `</div>`;
@@ -1343,17 +1466,17 @@ function loadInstalledInTable(table, options) {
                     title: '{% trans "Part" %}',
                     sortable: true,
                     formatter: function(value, row, index, field) {
-        
+
                         var url = `/part/${row.sub_part}/`;
                         var thumb = row.sub_part_detail.thumbnail;
                         var name = row.sub_part_detail.full_name;
-        
+
                         html = imageHoverIcon(thumb) + renderLink(name, url);
 
                         if (row.not_in_bom) {
                             html = `<i>${html}</i>`
                         }
-                        
+
                         return html;
                     }
                 },
@@ -1403,13 +1526,13 @@ function loadInstalledInTable(table, options) {
                     },
                     {
                         success: function(stock_items) {
-                            
+
                             var table_data = table.bootstrapTable('getData');
 
                             stock_items.forEach(function(item) {
 
                                 var match = false;
-                                
+
                                 for (var idx = 0; idx < table_data.length; idx++) {
 
                                     var row = table_data[idx];
@@ -1419,16 +1542,16 @@ function loadInstalledInTable(table, options) {
 
                                         // Match on "sub_part"
                                         if (row.sub_part == item.part) {
-                                            
+
                                             // First time?
                                             if (row.installed_count == null) {
                                                 row.installed_count = 0;
                                                 row.installed_items = [];
                                             }
-                                            
+
                                             row.installed_count += item.quantity;
                                             row.installed_items.push(item);
-                                            
+
                                             // Push the row back into the table
                                             table.bootstrapTable('updateRow', idx, row, true);
 
@@ -1445,7 +1568,7 @@ function loadInstalledInTable(table, options) {
                                 if (!match) {
                                     // The stock item did *not* match any items in the BOM!
                                     // Add a new row to the table...
-                                    
+
                                     // Contruct a new "row" to add to the table
                                     var new_row = {
                                         sub_part: item.part,

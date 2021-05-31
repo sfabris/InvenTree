@@ -22,7 +22,7 @@ from markdownx.models import MarkdownxField
 
 from mptt.models import MPTTModel, TreeForeignKey
 
-from InvenTree.status_codes import BuildStatus, StockStatus
+from InvenTree.status_codes import BuildStatus, StockStatus, StockHistoryCode
 from InvenTree.helpers import increment, getSetting, normalize, MakeBarcode
 from InvenTree.validators import validate_build_order_reference
 from InvenTree.models import InvenTreeAttachment
@@ -118,7 +118,7 @@ class Build(MPTTModel):
 
     def get_absolute_url(self):
         return reverse('build-detail', kwargs={'pk': self.id})
-        
+
     reference = models.CharField(
         unique=True,
         max_length=64,
@@ -168,7 +168,7 @@ class Build(MPTTModel):
         null=True, blank=True,
         help_text=_('SalesOrder to which this build is allocated')
     )
-    
+
     take_from = models.ForeignKey(
         'stock.StockLocation',
         verbose_name=_('Source Location'),
@@ -177,7 +177,7 @@ class Build(MPTTModel):
         null=True, blank=True,
         help_text=_('Select location to take stock from for this build (leave blank to take from any stock location)')
     )
-    
+
     destination = models.ForeignKey(
         'stock.StockLocation',
         verbose_name=_('Destination Location'),
@@ -207,7 +207,7 @@ class Build(MPTTModel):
         validators=[MinValueValidator(0)],
         help_text=_('Build status code')
     )
-    
+
     batch = models.CharField(
         verbose_name=_('Batch Code'),
         max_length=100,
@@ -215,9 +215,9 @@ class Build(MPTTModel):
         null=True,
         help_text=_('Batch code for this build output')
     )
-    
+
     creation_date = models.DateField(auto_now_add=True, editable=False, verbose_name=_('Creation Date'))
-    
+
     target_date = models.DateField(
         null=True, blank=True,
         verbose_name=_('Target completion date'),
@@ -251,7 +251,7 @@ class Build(MPTTModel):
         help_text=_('User responsible for this build order'),
         related_name='builds_responsible',
     )
-    
+
     link = InvenTree.fields.InvenTreeURLField(
         verbose_name=_('External Link'),
         blank=True, help_text=_('Link to external URL')
@@ -272,7 +272,7 @@ class Build(MPTTModel):
         else:
             descendants = self.get_descendants(include_self=True)
             Build.objects.filter(parent__pk__in=[d.pk for d in descendants])
-    
+
     def sub_build_count(self, cascade=True):
         """
         Return the number of sub builds under this one.
@@ -295,7 +295,7 @@ class Build(MPTTModel):
         query = query.filter(Build.OVERDUE_FILTER)
 
         return query.exists()
-    
+
     @property
     def active(self):
         """
@@ -441,7 +441,7 @@ class Build(MPTTModel):
 
         # Extract the "most recent" build order reference
         builds = cls.objects.exclude(reference=None)
-        
+
         if not builds.exists():
             return None
 
@@ -543,7 +543,7 @@ class Build(MPTTModel):
         - The sub_item in the BOM line must *not* be trackable
         - There is only a single stock item available (which has not already been allocated to this build)
         - The stock item has an availability greater than zero
-        
+
         Returns:
             A list object containing the StockItem objects to be allocated (and the quantities).
             Each item in the list is a dict as follows:
@@ -648,7 +648,7 @@ class Build(MPTTModel):
         """
         Deletes all stock allocations for this build.
         """
-        
+
         allocations = BuildItem.objects.filter(build=self)
 
         allocations.delete()
@@ -811,6 +811,7 @@ class Build(MPTTModel):
         # Select the location for the build output
         location = kwargs.get('location', self.destination)
         status = kwargs.get('status', StockStatus.OK)
+        notes = kwargs.get('notes', '')
 
         # List the allocated BuildItem objects for the given output
         allocated_items = output.items_to_install.all()
@@ -834,10 +835,13 @@ class Build(MPTTModel):
 
         output.save()
 
-        output.addTransactionNote(
-            _('Completed build output'),
+        output.add_tracking_entry(
+            StockHistoryCode.BUILD_OUTPUT_COMPLETED,
             user,
-            system=True
+            notes=notes,
+            deltas={
+                'status': status,
+            }
         )
 
         # Increase the completed quantity for this build
@@ -996,11 +1000,25 @@ class Build(MPTTModel):
 
     @property
     def required_parts(self):
-        """ Returns a dict of parts required to build this part (BOM) """
+        """ Returns a list of parts required to build this part (BOM) """
         parts = []
 
-        for item in self.part.bom_items.all().prefetch_related('sub_part'):
+        for item in self.bom_items:
             parts.append(item.sub_part)
+
+        return parts
+
+    @property
+    def required_parts_to_complete_build(self):
+        """ Returns a list of parts required to complete the full build """
+        parts = []
+
+        for bom_item in self.bom_items:
+            # Get remaining quantity needed
+            required_quantity_to_complete_build = self.remaining * bom_item.quantity
+            # Compare to net stock
+            if bom_item.sub_part.net_stock < required_quantity_to_complete_build:
+                parts.append(bom_item.sub_part)
 
         return parts
 
@@ -1131,7 +1149,7 @@ class BuildItem(models.Model):
         """
 
         self.validate_unique()
-        
+
         super().clean()
 
         errors = {}
@@ -1145,7 +1163,7 @@ class BuildItem(models.Model):
             # Allocated part must be in the BOM for the master part
             if self.stock_item.part not in self.build.part.getRequiredParts(recursive=False):
                 errors['stock_item'] = [_("Selected stock item not found in BOM for part '{p}'").format(p=self.build.part.full_name)]
-            
+
             # Allocated quantity cannot exceed available stock quantity
             if self.quantity > self.stock_item.quantity:
                 errors['quantity'] = [_("Allocated quantity ({n}) must not exceed available quantity ({q})").format(
