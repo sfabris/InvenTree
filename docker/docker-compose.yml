@@ -30,7 +30,8 @@ services:
             - POSTGRES_USER=pguser
             - POSTGRES_PASSWORD=pgpassword
         volumes:
-            - data:/var/lib/postgresql/data/
+            # Map 'data' volume such that postgres database is stored externally
+            - data_new:/var/lib/postgresql/data/
         restart: unless-stopped
 
     # InvenTree web server services
@@ -43,8 +44,8 @@ services:
         depends_on:
             - inventree-db
         volumes:
-            - data:/home/inventree/data
-            - static:/home/inventree/static
+            # Data volume must map to /home/inventree/data
+            - data_new:/home/inventree/data
         environment:
             # Default environment variables are configured to match the 'db' container
             # Note: If you change the database image, these will need to be adjusted
@@ -60,14 +61,14 @@ services:
     # Background worker process handles long-running or periodic tasks
     inventree-worker:
         container_name: inventree-worker
-        image: inventree/inventree:0.2.2
-        entrypoint: ./start_worker.sh
+        image: inventree/inventree:latest
+        entrypoint: ./start_prod_worker.sh
         depends_on:
             - inventree-db
             - inventree-server
         volumes:
+            # Data volume must map to /home/inventree/data
             - data:/home/inventree/data
-            - static:/home/inventree/static
         environment:
             # Default environment variables are configured to match the 'db' container
             # Note: If you change the database image, these will need to be adjusted
@@ -81,7 +82,8 @@ services:
         restart: unless-stopped
 
     # nginx acts as a reverse proxy
-    # static files are served by nginx
+    # static files are served directly by nginx
+    # media files are served by nginx, although authentication is redirected to inventree-server
     # web requests are redirected to gunicorn
     # NOTE: You will need to provide a working nginx.conf file!
     inventree-proxy:
@@ -93,24 +95,24 @@ services:
             # Change "1337" to the port that you want InvenTree web server to be available on
             - 1337:80
         volumes:
-            # Provide nginx.conf file to the container
+            # Provide ./nginx.conf file to the container
             # Refer to the provided example file as a starting point
             - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-            # Static data volume is mounted to /var/www/static
-            - static:/var/www/static:ro
+            # nginx proxy needs access to static and media files
+            - data:/var/www
         restart: unless-stopped
 
 volumes:
     # NOTE: Change /path/to/data to a directory on your local machine
     # Persistent data, stored external to the container(s)
-    data:
+    data_new:
         driver: local
         driver_opts:
             type: none
             o: bind
             # This directory specified where InvenTree data are stored "outside" the docker containers
             # Change this path to a local system path where you want InvenTree data stored
-            device: /mnt/inventree/
+            device: /mnt/inventree_new/
     # Static files, shared between containers
     static:
 
