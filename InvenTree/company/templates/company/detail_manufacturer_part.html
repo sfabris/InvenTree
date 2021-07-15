@@ -25,7 +25,7 @@
             {% endif %}
             <div class='btn-group'>
                 <div class="dropdown" style="float: right;">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{% trans "Options" %}
+                    <button class="btn btn-primary dropdown-toggle" id='table-options', type="button" data-toggle="dropdown">{% trans "Options" %}
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
@@ -53,28 +53,27 @@
 {{ block.super }}
 
     $("#manufacturer-part-create").click(function () {
-        launchModalForm(
-            "{% url 'manufacturer-part-create' %}",
-            {
-                data: {
-                    manufacturer: {{ company.id }},
+
+        constructForm('{% url "api-manufacturer-part-list" %}', {
+            fields: {
+                part: {},
+                manufacturer: {
+                    value: {{ company.pk }},
                 },
-                reload: true,
-                secondary: [
-                    {
-                        field: 'part',
-                        label: '{% trans "New Part" %}',
-                        title: '{% trans "Create new Part" %}',
-                        url: "{% url 'part-create' %}"
-                    },
-                    {
-                        field: 'manufacturer',
-                        label: '{% trans "New Manufacturer" %}',
-                        title: '{% trans "Create new Manufacturer" %}',
-                        url: "{% url 'manufacturer-create' %}",
-                    },
-                ]
-            });
+                MPN: {
+                    icon: 'fa-hashtag',
+                },
+                description: {},
+                link: {
+                    icon: 'fa-link',
+                },
+            },
+            method: 'POST',
+            title: '{% trans "Add Manufacturer Part" %}',
+            onSuccess: function() { 
+                $("#part-table").bootstrapTable("refresh");
+            }
+        });
     });
 
     loadManufacturerPartTable(
@@ -84,27 +83,20 @@
             params: {
                 part_detail: true,
                 manufacturer_detail: true,
-                company: {{ company.id }},
+                manufacturer: {{ company.id }},
             },
         }
     );
 
+    linkButtonsToSelection($("#manufacturer-table"), ['#table-options']);
+
     $("#multi-part-delete").click(function() {
         var selections = $("#part-table").bootstrapTable("getSelections");
 
-        var parts = [];
-
-        selections.forEach(function(item) {
-            parts.push(item.pk);
-        });
-
-        var url = "{% url 'manufacturer-part-delete' %}"
-
-        launchModalForm(url, {
-            data: {
-                parts: parts,
-            },
-            reload: true,
+        deleteManufacturerParts(selections, {
+            onSuccess: function() { 
+                $("#part-table").bootstrapTable("refresh");
+            }
         });
     });
 

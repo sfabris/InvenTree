@@ -7,7 +7,6 @@ from django.conf.urls import url, include
 from . import views
 
 build_detail_urls = [
-    url(r'^edit/', views.BuildUpdate.as_view(), name='build-edit'),
     url(r'^allocate/', views.BuildAllocate.as_view(), name='build-allocate'),
     url(r'^cancel/', views.BuildCancel.as_view(), name='build-cancel'),
     url(r'^delete/', views.BuildDelete.as_view(), name='build-delete'),
@@ -35,14 +34,6 @@ build_urls = [
         ])),
         url('^new/', views.BuildItemCreate.as_view(), name='build-item-create'),
     ])),
-
-    url('^attachment/', include([
-        url('^new/', views.BuildAttachmentCreate.as_view(), name='build-attachment-create'),
-        url(r'^(?P<pk>\d+)/edit/', views.BuildAttachmentEdit.as_view(), name='build-attachment-edit'),
-        url(r'^(?P<pk>\d+)/delete/', views.BuildAttachmentDelete.as_view(), name='build-attachment-delete'),
-    ])),
-
-    url(r'new/', views.BuildCreate.as_view(), name='build-create'),
 
     url(r'^(?P<pk>\d+)/', include(build_detail_urls)),
 

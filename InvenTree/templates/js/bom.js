@@ -242,7 +242,7 @@ function loadBomTable(table, options) {
             return renderLink(text, url);
         }
     });
-
+    
     cols.push(
     {
         field: 'purchase_price_range',
@@ -514,14 +514,13 @@ function loadBomTable(table, options) {
             var pk = $(this).attr('pk');
             var url = `/part/bom/${pk}/delete/`;
 
-            launchModalForm(
-                url,
-                {
-                    success: function() {
-                        reloadBomTable(table);
-                    }
+            constructForm(`/api/bom/${pk}/`, {
+                method: 'DELETE',
+                title: '{% trans "Delete BOM Item" %}',
+                onSuccess: function() {
+                    reloadBomTable(table);
                 }
-            );
+            }); 
         });
 
         table.on('click', '.bom-edit-button', function() {

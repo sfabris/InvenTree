@@ -30,7 +30,7 @@ from mptt.models import TreeForeignKey, MPTTModel
 
 from stdimage.models import StdImageField
 
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 from datetime import datetime
 from rapidfuzz import fuzz
 import hashlib
@@ -74,6 +74,10 @@ class PartCategory(InvenTreeTree):
     )
 
     default_keywords = models.CharField(null=True, blank=True, max_length=250, verbose_name=_('Default keywords'), help_text=_('Default keywords for parts in this category'))
+
+    @staticmethod
+    def get_api_url():
+        return reverse('api-part-category-list')
 
     def get_absolute_url(self):
         return reverse('category-detail', kwargs={'pk': self.id})
@@ -328,6 +332,11 @@ class Part(MPTTModel):
     class MPTTMeta:
         # For legacy reasons the 'variant_of' field is used to indicate the MPTT parent
         parent_attr = 'variant_of'
+
+    @staticmethod
+    def get_api_url():
+
+        return reverse('api-part-list')
 
     def get_context_data(self, request, **kwargs):
         """
@@ -683,7 +692,6 @@ class Part(MPTTModel):
         null=True, blank=True,
         limit_choices_to={
             'is_template': True,
-            'active': True,
         },
         on_delete=models.SET_NULL,
         help_text=_('Is this part a variant of another part?'),
@@ -1968,6 +1976,10 @@ class PartAttachment(InvenTreeAttachment):
     Model for storing file attachments against a Part object
     """
 
+    @staticmethod
+    def get_api_url():
+        return reverse('api-part-attachment-list')
+
     def getSubdir(self):
         return os.path.join("part_files", str(self.part.id))
 
@@ -1979,6 +1991,10 @@ class PartSellPriceBreak(common.models.PriceBreak):
     """
     Represents a price break for selling this part
     """
+    
+    @staticmethod
+    def get_api_url():
+        return reverse('api-part-sale-price-list')
 
     part = models.ForeignKey(
         Part, on_delete=models.CASCADE,
@@ -1995,6 +2011,10 @@ class PartInternalPriceBreak(common.models.PriceBreak):
     """
     Represents a price break for internally selling this part
     """
+
+    @staticmethod
+    def get_api_url():
+        return reverse('api-part-internal-price-list')
 
     part = models.ForeignKey(
         Part, on_delete=models.CASCADE,
@@ -2039,6 +2059,10 @@ class PartTestTemplate(models.Model):
     To enable generation of unique lookup-keys for each test, there are some validation tests
     run on the model (refer to the validate_unique function).
     """
+
+    @staticmethod
+    def get_api_url():
+        return reverse('api-part-test-template-list')
 
     def save(self, *args, **kwargs):
 
@@ -2138,6 +2162,10 @@ class PartParameterTemplate(models.Model):
         units: The units of the Parameter [string]
     """
 
+    @staticmethod
+    def get_api_url():
+        return reverse('api-part-parameter-template-list')
+
     def __str__(self):
         s = str(self.name)
         if self.units:
@@ -2174,6 +2202,10 @@ class PartParameter(models.Model):
         template: Reference to a single PartParameterTemplate object
         data: The data (value) of the Parameter [string]
     """
+
+    @staticmethod
+    def get_api_url():
+        return reverse('api-part-parameter-list')
 
     def __str__(self):
         # String representation of a PartParameter (used in the admin interface)
@@ -2265,6 +2297,10 @@ class BomItem(models.Model):
         inherited: This BomItem can be inherited by the BOMs of variant parts
         allow_variants: Stock for part variants can be substituted for this BomItem
     """
+
+    @staticmethod
+    def get_api_url():
+        return reverse('api-bom-list')
 
     def save(self, *args, **kwargs):
 
@@ -2381,6 +2417,15 @@ class BomItem(models.Model):
 
         - If the "sub_part" is trackable, then the "part" must be trackable too!
         """
+
+        super().clean()
+
+        try:
+            self.quantity = Decimal(self.quantity)
+        except InvalidOperation:
+            raise ValidationError({
+                'quantity': _('Must be a valid number')
+            })
 
         try:
             # Check for circular BOM references
