@@ -1,49 +1,48 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: inventree\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-12 20:06+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-08-07 15:30\n"
+"Last-Translator: \n"
+"Language-Team: Norwegian\n"
+"Language: no_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: inventree\n"
+"X-Crowdin-Project-ID: 452300\n"
+"X-Crowdin-Language: no\n"
+"X-Crowdin-File: /[inventree.InvenTree] l10/InvenTree/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 138\n"
 
 #: InvenTree/api.py:64
 msgid "API endpoint not found"
-msgstr ""
+msgstr "API endepunkt ikke funnet"
 
 #: InvenTree/api.py:110
 msgid "No action specified"
-msgstr ""
+msgstr "Ingen handling spesifisert"
 
 #: InvenTree/api.py:124
 msgid "No matching action found"
-msgstr ""
+msgstr "Ingen samsvarende handling funnet"
 
 #: InvenTree/fields.py:100
 msgid "Enter date"
-msgstr ""
+msgstr "Oppgi dato"
 
 #: InvenTree/forms.py:111 build/forms.py:102 build/forms.py:123
 #: build/forms.py:145 build/forms.py:169 build/forms.py:185 build/forms.py:227
 #: order/forms.py:30 order/forms.py:41 order/forms.py:52 order/forms.py:63
 #: order/forms.py:74 part/forms.py:108 templates/js/translated/forms.js:564
 msgid "Confirm"
-msgstr ""
+msgstr "Bekreft"
 
 #: InvenTree/forms.py:127
 msgid "Confirm delete"
-msgstr ""
+msgstr "Bekreft sletting"
 
 #: InvenTree/forms.py:128
 msgid "Confirm item deletion"
@@ -51,84 +50,84 @@ msgstr ""
 
 #: InvenTree/forms.py:160 templates/registration/login.html:76
 msgid "Enter password"
-msgstr ""
+msgstr "Oppgi passord"
 
 #: InvenTree/forms.py:161
 msgid "Enter new password"
-msgstr ""
+msgstr "Oppgi nytt passord"
 
 #: InvenTree/forms.py:168
 msgid "Confirm password"
-msgstr ""
+msgstr "Bekreft passord"
 
 #: InvenTree/forms.py:169
 msgid "Confirm new password"
-msgstr ""
+msgstr "Bekreft nytt passord"
 
 #: InvenTree/forms.py:201
 msgid "Select Category"
-msgstr ""
+msgstr "Velg kategori"
 
 #: InvenTree/helpers.py:401
 #, python-brace-format
 msgid "Duplicate serial: {n}"
-msgstr ""
+msgstr "Dupliser serie: {n}"
 
 #: InvenTree/helpers.py:408 order/models.py:315 order/models.py:430
 #: stock/views.py:1363
 msgid "Invalid quantity provided"
-msgstr ""
+msgstr "Ugyldig mengde oppgitt"
 
 #: InvenTree/helpers.py:411
 msgid "Empty serial number string"
-msgstr ""
+msgstr "Tom serienummerstreng"
 
 #: InvenTree/helpers.py:433 InvenTree/helpers.py:436 InvenTree/helpers.py:439
 #: InvenTree/helpers.py:464
 #, python-brace-format
 msgid "Invalid group: {g}"
-msgstr ""
+msgstr "Ugyldig gruppe: {g}"
 
 #: InvenTree/helpers.py:469
 #, python-brace-format
 msgid "Duplicate serial: {g}"
-msgstr ""
+msgstr "Dupliser serie: {g}"
 
 #: InvenTree/helpers.py:477
 msgid "No serial numbers found"
-msgstr ""
+msgstr "Ingen serienummer funnet"
 
 #: InvenTree/helpers.py:481
 #, python-brace-format
 msgid "Number of unique serial number ({s}) must match quantity ({q})"
-msgstr ""
+msgstr "Antall unike serienummer ({s}) må samsvare mengde ({q})"
 
 #: InvenTree/models.py:66 stock/models.py:1826
 msgid "Attachment"
-msgstr ""
+msgstr "Vedlegg"
 
 #: InvenTree/models.py:67
 msgid "Select file to attach"
-msgstr ""
+msgstr "Velg fil å legge ved"
 
 #: InvenTree/models.py:69 templates/js/translated/attachment.js:87
 msgid "Comment"
-msgstr ""
+msgstr "Kommenter"
 
 #: InvenTree/models.py:69
 msgid "File comment"
-msgstr ""
+msgstr "Kommentar til fil"
 
 #: InvenTree/models.py:75 InvenTree/models.py:76 common/models.py:993
 #: common/models.py:994 part/models.py:2051
 #: report/templates/report/inventree_test_report_base.html:91
 #: templates/js/translated/stock.js:1690
 msgid "User"
-msgstr ""
+msgstr "Bruker"
 
 #: InvenTree/models.py:79
 msgid "upload date"
-msgstr ""
+msgstr "opplastet dato"
 
 #: InvenTree/models.py:99
 msgid "Filename must not be empty"
@@ -157,7 +156,7 @@ msgstr ""
 
 #: InvenTree/models.py:184
 msgid "Invalid choice"
-msgstr ""
+msgstr "Ugyldig valg"
 
 #: InvenTree/models.py:200 InvenTree/models.py:201 company/models.py:414
 #: label/models.py:112 part/models.py:658 part/models.py:2212
@@ -167,7 +166,7 @@ msgstr ""
 #: templates/js/translated/part.js:603 templates/js/translated/part.js:1130
 #: templates/js/translated/stock.js:1483
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #: InvenTree/models.py:207 build/models.py:187
 #: build/templates/build/detail.html:24 company/models.py:353
@@ -191,11 +190,11 @@ msgstr ""
 #: templates/js/translated/stock.js:840 templates/js/translated/stock.js:1495
 #: templates/js/translated/stock.js:1540
 msgid "Description"
-msgstr ""
+msgstr "Beskrivelse"
 
 #: InvenTree/models.py:208
 msgid "Description (optional)"
-msgstr ""
+msgstr "Beskrivelse (valgfritt)"
 
 #: InvenTree/models.py:216
 msgid "parent"
@@ -203,87 +202,89 @@ msgstr ""
 
 #: InvenTree/serializers.py:55 part/models.py:2454
 msgid "Must be a valid number"
-msgstr ""
+msgstr "Nummer må være gyldig"
 
 #: InvenTree/serializers.py:244
+#, fuzzy
+#| msgid "Vietnamese"
 msgid "Filename"
-msgstr ""
+msgstr "Vietnamesisk"
 
 #: InvenTree/settings.py:523
 msgid "German"
-msgstr ""
+msgstr "Tysk"
 
 #: InvenTree/settings.py:524
 msgid "Greek"
-msgstr ""
+msgstr "Gresk"
 
 #: InvenTree/settings.py:525
 msgid "English"
-msgstr ""
+msgstr "Engelsk"
 
 #: InvenTree/settings.py:526
 msgid "Spanish"
-msgstr ""
+msgstr "Spansk"
 
 #: InvenTree/settings.py:527
 msgid "French"
-msgstr ""
+msgstr "Fransk"
 
 #: InvenTree/settings.py:528
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebraisk"
 
 #: InvenTree/settings.py:529
 msgid "Italian"
-msgstr ""
+msgstr "Italiensk"
 
 #: InvenTree/settings.py:530
 msgid "Japanese"
-msgstr ""
+msgstr "Japansk"
 
 #: InvenTree/settings.py:531
 msgid "Korean"
-msgstr ""
+msgstr "Koreansk"
 
 #: InvenTree/settings.py:532
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlandsk"
 
 #: InvenTree/settings.py:533
 msgid "Norwegian"
-msgstr ""
+msgstr "Norsk"
 
 #: InvenTree/settings.py:534
 msgid "Polish"
-msgstr ""
+msgstr "Polsk"
 
 #: InvenTree/settings.py:535
 msgid "Russian"
-msgstr ""
+msgstr "Russisk"
 
 #: InvenTree/settings.py:536
 msgid "Swedish"
-msgstr ""
+msgstr "Svensk"
 
 #: InvenTree/settings.py:537
 msgid "Thai"
-msgstr ""
+msgstr "Thailandsk"
 
 #: InvenTree/settings.py:538
 msgid "Turkish"
-msgstr ""
+msgstr "Tyrkisk"
 
 #: InvenTree/settings.py:539
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamesisk"
 
 #: InvenTree/settings.py:540
 msgid "Chinese"
-msgstr ""
+msgstr "Kinesisk"
 
 #: InvenTree/status.py:94
 msgid "Background worker check failed"
-msgstr ""
+msgstr "Bakgrunnsarbeiderkontroll mislyktes"
 
 #: InvenTree/status.py:98
 msgid "Email backend not configured"
@@ -488,23 +489,23 @@ msgstr ""
 
 #: barcodes/api.py:53 barcodes/api.py:150
 msgid "Must provide barcode_data parameter"
-msgstr ""
+msgstr "Må oppgi gyldig strekkode_data parameter"
 
 #: barcodes/api.py:126
 msgid "No match found for barcode data"
-msgstr ""
+msgstr "Ingen treff funnet for strekkodedata"
 
 #: barcodes/api.py:128
 msgid "Match found for barcode data"
-msgstr ""
+msgstr "Treff funnet for strekkodedata"
 
 #: barcodes/api.py:153
 msgid "Must provide stockitem parameter"
-msgstr ""
+msgstr "Må oppgi lagervareparameter"
 
 #: barcodes/api.py:160
 msgid "No matching stock item found"
-msgstr ""
+msgstr "Ingen samsvarende lagervare funnet"
 
 #: barcodes/api.py:190
 msgid "Barcode already matches StockItem object"
@@ -3939,8 +3940,10 @@ msgid "Must be greater than zero"
 msgstr ""
 
 #: part/api.py:704
+#, fuzzy
+#| msgid "Must be a valid number"
 msgid "Must be a valid quantity"
-msgstr ""
+msgstr "Nummer må være gyldig"
 
 #: part/api.py:719
 msgid "Specify location for initial part stock"

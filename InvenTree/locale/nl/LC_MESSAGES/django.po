@@ -1,22 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: inventree\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-12 20:06+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-08-07 15:30\n"
+"Last-Translator: \n"
+"Language-Team: Dutch\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: inventree\n"
+"X-Crowdin-Project-ID: 452300\n"
+"X-Crowdin-Language: nl\n"
+"X-Crowdin-File: /[inventree.InvenTree] l10/InvenTree/locale/en/LC_MESSAGES/django.po\n"
+"X-Crowdin-File-ID: 138\n"
 
 #: InvenTree/api.py:64
 msgid "API endpoint not found"
@@ -24,50 +23,50 @@ msgstr ""
 
 #: InvenTree/api.py:110
 msgid "No action specified"
-msgstr ""
+msgstr "Geen actie gespecificeerd"
 
 #: InvenTree/api.py:124
 msgid "No matching action found"
-msgstr ""
+msgstr "Geen overeenkomende actie gevonden"
 
 #: InvenTree/fields.py:100
 msgid "Enter date"
-msgstr ""
+msgstr "Voer datum in"
 
 #: InvenTree/forms.py:111 build/forms.py:102 build/forms.py:123
 #: build/forms.py:145 build/forms.py:169 build/forms.py:185 build/forms.py:227
 #: order/forms.py:30 order/forms.py:41 order/forms.py:52 order/forms.py:63
 #: order/forms.py:74 part/forms.py:108 templates/js/translated/forms.js:564
 msgid "Confirm"
-msgstr ""
+msgstr "Bevestigen"
 
 #: InvenTree/forms.py:127
 msgid "Confirm delete"
-msgstr ""
+msgstr "Bevestigen verwijdering"
 
 #: InvenTree/forms.py:128
 msgid "Confirm item deletion"
-msgstr ""
+msgstr "Bevestig item verwijdering"
 
 #: InvenTree/forms.py:160 templates/registration/login.html:76
 msgid "Enter password"
-msgstr ""
+msgstr "Voer wachtwoord in"
 
 #: InvenTree/forms.py:161
 msgid "Enter new password"
-msgstr ""
+msgstr "Voer een nieuw wachtwoord in"
 
 #: InvenTree/forms.py:168
 msgid "Confirm password"
-msgstr ""
+msgstr "Wachtwoord bevestigen"
 
 #: InvenTree/forms.py:169
 msgid "Confirm new password"
-msgstr ""
+msgstr "Nieuw wachtwoord bevestigen"
 
 #: InvenTree/forms.py:201
 msgid "Select Category"
-msgstr ""
+msgstr "Categorie selecteren"
 
 #: InvenTree/helpers.py:401
 #, python-brace-format
@@ -77,7 +76,7 @@ msgstr ""
 #: InvenTree/helpers.py:408 order/models.py:315 order/models.py:430
 #: stock/views.py:1363
 msgid "Invalid quantity provided"
-msgstr ""
+msgstr "Ongeldige hoeveeldheid ingevoerd"
 
 #: InvenTree/helpers.py:411
 msgid "Empty serial number string"
@@ -87,7 +86,7 @@ msgstr ""
 #: InvenTree/helpers.py:464
 #, python-brace-format
 msgid "Invalid group: {g}"
-msgstr ""
+msgstr "Ongeldige groep: {g}"
 
 #: InvenTree/helpers.py:469
 #, python-brace-format
@@ -96,39 +95,39 @@ msgstr ""
 
 #: InvenTree/helpers.py:477
 msgid "No serial numbers found"
-msgstr ""
+msgstr "Geen serienummers gevonden"
 
 #: InvenTree/helpers.py:481
 #, python-brace-format
 msgid "Number of unique serial number ({s}) must match quantity ({q})"
-msgstr ""
+msgstr "Aantal unieke serienummer ({s}) moet overeenkomen met de hoeveelheid ({q})"
 
 #: InvenTree/models.py:66 stock/models.py:1826
 msgid "Attachment"
-msgstr ""
+msgstr "Bijlage"
 
 #: InvenTree/models.py:67
 msgid "Select file to attach"
-msgstr ""
+msgstr "Bestand als bijlage selecteren"
 
 #: InvenTree/models.py:69 templates/js/translated/attachment.js:87
 msgid "Comment"
-msgstr ""
+msgstr "Opmerking"
 
 #: InvenTree/models.py:69
 msgid "File comment"
-msgstr ""
+msgstr "Bijlage opmerking"
 
 #: InvenTree/models.py:75 InvenTree/models.py:76 common/models.py:993
 #: common/models.py:994 part/models.py:2051
 #: report/templates/report/inventree_test_report_base.html:91
 #: templates/js/translated/stock.js:1690
 msgid "User"
-msgstr ""
+msgstr "Gebruiker"
 
 #: InvenTree/models.py:79
 msgid "upload date"
-msgstr ""
+msgstr "uploaddatum"
 
 #: InvenTree/models.py:99
 msgid "Filename must not be empty"
@@ -157,7 +156,7 @@ msgstr ""
 
 #: InvenTree/models.py:184
 msgid "Invalid choice"
-msgstr ""
+msgstr "Ongeldige keuze"
 
 #: InvenTree/models.py:200 InvenTree/models.py:201 company/models.py:414
 #: label/models.py:112 part/models.py:658 part/models.py:2212
@@ -167,7 +166,7 @@ msgstr ""
 #: templates/js/translated/part.js:603 templates/js/translated/part.js:1130
 #: templates/js/translated/stock.js:1483
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: InvenTree/models.py:207 build/models.py:187
 #: build/templates/build/detail.html:24 company/models.py:353
@@ -191,103 +190,105 @@ msgstr ""
 #: templates/js/translated/stock.js:840 templates/js/translated/stock.js:1495
 #: templates/js/translated/stock.js:1540
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #: InvenTree/models.py:208
 msgid "Description (optional)"
-msgstr ""
+msgstr "Omschrijving (optioneel)"
 
 #: InvenTree/models.py:216
 msgid "parent"
-msgstr ""
+msgstr "overkoepelend"
 
 #: InvenTree/serializers.py:55 part/models.py:2454
 msgid "Must be a valid number"
-msgstr ""
+msgstr "Moet een geldig nummer zijn"
 
 #: InvenTree/serializers.py:244
+#, fuzzy
+#| msgid "Vietnamese"
 msgid "Filename"
-msgstr ""
+msgstr "Vietnamees"
 
 #: InvenTree/settings.py:523
 msgid "German"
-msgstr ""
+msgstr "Duits"
 
 #: InvenTree/settings.py:524
 msgid "Greek"
-msgstr ""
+msgstr "Grieks"
 
 #: InvenTree/settings.py:525
 msgid "English"
-msgstr ""
+msgstr "Engels"
 
 #: InvenTree/settings.py:526
 msgid "Spanish"
-msgstr ""
+msgstr "Spaans"
 
 #: InvenTree/settings.py:527
 msgid "French"
-msgstr ""
+msgstr "Frans"
 
 #: InvenTree/settings.py:528
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebreeuws"
 
 #: InvenTree/settings.py:529
 msgid "Italian"
-msgstr ""
+msgstr "Italiaans"
 
 #: InvenTree/settings.py:530
 msgid "Japanese"
-msgstr ""
+msgstr "Japans"
 
 #: InvenTree/settings.py:531
 msgid "Korean"
-msgstr ""
+msgstr "Koreaans"
 
 #: InvenTree/settings.py:532
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlands"
 
 #: InvenTree/settings.py:533
 msgid "Norwegian"
-msgstr ""
+msgstr "Noors"
 
 #: InvenTree/settings.py:534
 msgid "Polish"
-msgstr ""
+msgstr "Pools"
 
 #: InvenTree/settings.py:535
 msgid "Russian"
-msgstr ""
+msgstr "Russisch"
 
 #: InvenTree/settings.py:536
 msgid "Swedish"
-msgstr ""
+msgstr "Zweeds"
 
 #: InvenTree/settings.py:537
 msgid "Thai"
-msgstr ""
+msgstr "Thais"
 
 #: InvenTree/settings.py:538
 msgid "Turkish"
-msgstr ""
+msgstr "Turks"
 
 #: InvenTree/settings.py:539
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamees"
 
 #: InvenTree/settings.py:540
 msgid "Chinese"
-msgstr ""
+msgstr "Chinees"
 
 #: InvenTree/status.py:94
 msgid "Background worker check failed"
-msgstr ""
+msgstr "Achtergrondwerker check is gefaald"
 
 #: InvenTree/status.py:98
 msgid "Email backend not configured"
-msgstr ""
+msgstr "E-mailbackend niet geconfigureerd"
 
 #: InvenTree/status.py:101
 msgid "InvenTree system health checks failed"
@@ -484,47 +485,47 @@ msgstr ""
 
 #: InvenTree/views.py:910 templates/navbar.html:105
 msgid "System Information"
-msgstr ""
+msgstr "Systeeminformatie"
 
 #: barcodes/api.py:53 barcodes/api.py:150
 msgid "Must provide barcode_data parameter"
-msgstr ""
+msgstr "De paramenter barcode_data moet worden aangeleverd"
 
 #: barcodes/api.py:126
 msgid "No match found for barcode data"
-msgstr ""
+msgstr "Geen overeenkomst gevonden voor barcode gegevens"
 
 #: barcodes/api.py:128
 msgid "Match found for barcode data"
-msgstr ""
+msgstr "Overeenkomst gevonden voor barcode gegevens"
 
 #: barcodes/api.py:153
 msgid "Must provide stockitem parameter"
-msgstr ""
+msgstr "Moet voorraaditem parameter aanleveren"
 
 #: barcodes/api.py:160
 msgid "No matching stock item found"
-msgstr ""
+msgstr "Geen overeenkomend voorraaditem gevonden"
 
 #: barcodes/api.py:190
 msgid "Barcode already matches StockItem object"
-msgstr ""
+msgstr "Barcode komt al overeen met StockItem object"
 
 #: barcodes/api.py:194
 msgid "Barcode already matches StockLocation object"
-msgstr ""
+msgstr "Barcode komt al overeen met StockLocation object"
 
 #: barcodes/api.py:198
 msgid "Barcode already matches Part object"
-msgstr ""
+msgstr "Barcode komt al overeen met Part object"
 
 #: barcodes/api.py:204 barcodes/api.py:216
 msgid "Barcode hash already matches StockItem object"
-msgstr ""
+msgstr "Barcode komt al overeen met StockItem object"
 
 #: barcodes/api.py:222
 msgid "Barcode associated with StockItem"
-msgstr ""
+msgstr "Barcode gekoppeld aan StockItem"
 
 #: build/forms.py:37
 msgid "Build Order reference"
@@ -532,7 +533,7 @@ msgstr ""
 
 #: build/forms.py:38
 msgid "Order target date"
-msgstr ""
+msgstr "Order streefdatum"
 
 #: build/forms.py:42 build/templates/build/build_base.html:146
 #: build/templates/build/detail.html:124
@@ -542,7 +543,7 @@ msgstr ""
 #: templates/js/translated/build.js:962 templates/js/translated/order.js:358
 #: templates/js/translated/order.js:463
 msgid "Target Date"
-msgstr ""
+msgstr "Streefdatum"
 
 #: build/forms.py:43 build/models.py:277
 msgid "Target date for build completion. Build will be overdue after this date."
@@ -580,43 +581,43 @@ msgstr ""
 #: templates/js/translated/part.js:1440 templates/js/translated/part.js:1518
 #: templates/js/translated/stock.js:1675 templates/js/translated/stock.js:1850
 msgid "Quantity"
-msgstr ""
+msgstr "Aantal"
 
 #: build/forms.py:49
 msgid "Number of items to build"
-msgstr ""
+msgstr "Aantal items om te maken"
 
 #: build/forms.py:91
 msgid "Enter quantity for build output"
-msgstr ""
+msgstr "Voer hoeveelheid in voor build-output"
 
 #: build/forms.py:95 order/forms.py:114 stock/forms.py:83
 msgid "Serial Numbers"
-msgstr ""
+msgstr "Serienummers"
 
 #: build/forms.py:97
 msgid "Enter serial numbers for build outputs"
-msgstr ""
+msgstr "Voer serienummers in voor build-outputs"
 
 #: build/forms.py:103
 msgid "Confirm creation of build output"
-msgstr ""
+msgstr "Bevestig het maken van build-output"
 
 #: build/forms.py:124
 msgid "Confirm deletion of build output"
-msgstr ""
+msgstr "Bevestig verwijdering van build-output"
 
 #: build/forms.py:145
 msgid "Confirm unallocation of stock"
-msgstr ""
+msgstr "Bevestig het ongedaan maken van de toewijzing van voorraad"
 
 #: build/forms.py:169
 msgid "Confirm stock allocation"
-msgstr ""
+msgstr "Bevestig de voorraadtoewijzing"
 
 #: build/forms.py:186
 msgid "Mark build as complete"
-msgstr ""
+msgstr "Markeer build als voltooid"
 
 #: build/forms.py:210 build/templates/build/auto_allocate.html:18
 #: order/serializers.py:216 order/serializers.py:275 stock/forms.py:280
@@ -629,11 +630,11 @@ msgstr ""
 #: templates/js/translated/stock.js:329 templates/js/translated/stock.js:942
 #: templates/js/translated/stock.js:1567
 msgid "Location"
-msgstr ""
+msgstr "Locatie"
 
 #: build/forms.py:211
 msgid "Location of completed parts"
-msgstr ""
+msgstr "Locatie van voltooide onderdelen"
 
 #: build/forms.py:215 build/templates/build/build_base.html:138
 #: build/templates/build/detail.html:62 order/models.py:555
@@ -644,39 +645,39 @@ msgstr ""
 #: templates/js/translated/stock.js:917 templates/js/translated/stock.js:1644
 #: templates/js/translated/stock.js:1866
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: build/forms.py:216
 msgid "Build output stock status"
-msgstr ""
+msgstr "Build output voorraad status"
 
 #: build/forms.py:223
 msgid "Confirm incomplete"
-msgstr ""
+msgstr "Bevestig onvolledigheid"
 
 #: build/forms.py:224
 msgid "Confirm completion with incomplete stock allocation"
-msgstr ""
+msgstr "Bevestig voltooiing met onvolledige voorraadtoewijzing"
 
 #: build/forms.py:227
 msgid "Confirm build completion"
-msgstr ""
+msgstr "Bevestig build voltooiing"
 
 #: build/forms.py:252
 msgid "Confirm cancel"
-msgstr ""
+msgstr "Annuleren bevestigen"
 
 #: build/forms.py:252 build/views.py:65
 msgid "Confirm build cancellation"
-msgstr ""
+msgstr "Bevestig annulering van de build"
 
 #: build/forms.py:266
 msgid "Select quantity of stock to allocate"
-msgstr ""
+msgstr "Selecteer de te toewijzen hoeveelheid voorraad"
 
 #: build/models.py:113
 msgid "Invalid choice for parent build"
-msgstr ""
+msgstr "Ongeldige keuze voor bovenliggende build"
 
 #: build/models.py:117 build/templates/build/build_base.html:9
 #: build/templates/build/build_base.html:73
@@ -710,11 +711,11 @@ msgstr ""
 #: templates/js/translated/bom.js:237 templates/js/translated/build.js:718
 #: templates/js/translated/build.js:1183
 msgid "Reference"
-msgstr ""
+msgstr "Referentie"
 
 #: build/models.py:190
 msgid "Brief description of the build"
-msgstr ""
+msgstr "Korte beschrijving van de build"
 
 #: build/models.py:199 build/templates/build/build_base.html:163
 #: build/templates/build/detail.html:80
@@ -723,7 +724,7 @@ msgstr ""
 
 #: build/models.py:200
 msgid "BuildOrder to which this build is allocated"
-msgstr ""
+msgstr "BuildOrder waaraan deze build is toegewezen"
 
 #: build/models.py:205 build/templates/build/auto_allocate.html:16
 #: build/templates/build/build_base.html:128
@@ -750,31 +751,31 @@ msgstr ""
 #: templates/js/translated/part.js:864 templates/js/translated/stock.js:201
 #: templates/js/translated/stock.js:797 templates/js/translated/stock.js:1838
 msgid "Part"
-msgstr ""
+msgstr "Onderdeel"
 
 #: build/models.py:213
 msgid "Select part to build"
-msgstr ""
+msgstr "Selecteer onderdeel om te bouwen"
 
 #: build/models.py:218
 msgid "Sales Order Reference"
-msgstr ""
+msgstr "Verkoop Order Referentie"
 
 #: build/models.py:222
 msgid "SalesOrder to which this build is allocated"
-msgstr ""
+msgstr "Verkooporder waaraan deze build is toegewezen"
 
 #: build/models.py:227
 msgid "Source Location"
-msgstr ""
+msgstr "Bron Locatie"
 
 #: build/models.py:231
 msgid "Select location to take stock from for this build (leave blank to take from any stock location)"
-msgstr ""
+msgstr "Selecteer de locatie waar de voorraad van de build vandaan moet komen (laat leeg om vanaf elke standaard locatie te nemen)"
 
 #: build/models.py:236
 msgid "Destination Location"
-msgstr ""
+msgstr "Bestemmings Locatie"
 
 #: build/models.py:240
 msgid "Select location where the completed items will be stored"
@@ -1029,7 +1030,7 @@ msgstr ""
 #: stock/templates/stock/item_base.html:62
 #: stock/templates/stock/location.html:31
 msgid "Admin view"
-msgstr ""
+msgstr "Beheerder weergave"
 
 #: build/templates/build/build_base.html:81
 #: build/templates/build/build_base.html:150
@@ -1041,33 +1042,33 @@ msgstr ""
 #: templates/js/translated/table_filters.js:291
 #: templates/js/translated/table_filters.js:308
 msgid "Overdue"
-msgstr ""
+msgstr "Achterstallig"
 
 #: build/templates/build/build_base.html:90
 msgid "Print actions"
-msgstr ""
+msgstr "Afdruk acties"
 
 #: build/templates/build/build_base.html:94
 msgid "Print Build Order"
-msgstr ""
+msgstr "Print Bouw Order"
 
 #: build/templates/build/build_base.html:100
 #: build/templates/build/build_base.html:222
 msgid "Complete Build"
-msgstr ""
+msgstr "Voltooi Build"
 
 #: build/templates/build/build_base.html:105
 msgid "Build actions"
-msgstr ""
+msgstr "Build acties"
 
 #: build/templates/build/build_base.html:109
 msgid "Edit Build"
-msgstr ""
+msgstr "Bewerk Build"
 
 #: build/templates/build/build_base.html:111
 #: build/templates/build/build_base.html:206 build/views.py:56
 msgid "Cancel Build"
-msgstr ""
+msgstr "Annuleer Build"
 
 #: build/templates/build/build_base.html:114
 msgid "Delete Build"
@@ -1076,7 +1077,7 @@ msgstr ""
 #: build/templates/build/build_base.html:124
 #: build/templates/build/detail.html:15
 msgid "Build Details"
-msgstr ""
+msgstr "Build details"
 
 #: build/templates/build/build_base.html:150
 #, python-format
@@ -1086,7 +1087,7 @@ msgstr ""
 #: build/templates/build/build_base.html:157
 #: build/templates/build/detail.html:67
 msgid "Progress"
-msgstr ""
+msgstr "Voortgang"
 
 #: build/templates/build/build_base.html:170
 #: build/templates/build/detail.html:87 order/models.py:835
@@ -1098,13 +1099,13 @@ msgstr ""
 #: stock/templates/stock/item_base.html:293
 #: templates/js/translated/order.js:405
 msgid "Sales Order"
-msgstr ""
+msgstr "Verkoop Order"
 
 #: build/templates/build/build_base.html:177
 #: build/templates/build/detail.html:101
 #: report/templates/report/inventree_build_order_base.html:153
 msgid "Issued By"
-msgstr ""
+msgstr "Uitgegeven door"
 
 #: build/templates/build/build_base.html:214
 msgid "Incomplete Outputs"
@@ -3009,8 +3010,10 @@ msgid "Part query filters (comma-separated value of key=value pairs)"
 msgstr ""
 
 #: order/api.py:302
+#, fuzzy
+#| msgid "Destination Location"
 msgid "Destination location must be specified"
-msgstr ""
+msgstr "Bestemmings Locatie"
 
 #: order/forms.py:30 order/templates/order/order_base.html:47
 msgid "Place order"
@@ -3278,8 +3281,10 @@ msgid "Unique identifier field"
 msgstr ""
 
 #: order/serializers.py:250
+#, fuzzy
+#| msgid "Barcode already matches Part object"
 msgid "Barcode is already in use"
-msgstr ""
+msgstr "Barcode komt al overeen met Part object"
 
 #: order/serializers.py:289
 msgid "Line items must be provided"
@@ -3939,8 +3944,10 @@ msgid "Must be greater than zero"
 msgstr ""
 
 #: part/api.py:704
+#, fuzzy
+#| msgid "Must be a valid number"
 msgid "Must be a valid quantity"
-msgstr ""
+msgstr "Moet een geldig nummer zijn"
 
 #: part/api.py:719
 msgid "Specify location for initial part stock"
@@ -4607,8 +4614,10 @@ msgid "Set Category"
 msgstr ""
 
 #: part/templates/part/category.html:141
+#, fuzzy
+#| msgid "Print actions"
 msgid "Print Labels"
-msgstr ""
+msgstr "Afdruk acties"
 
 #: part/templates/part/category.html:142
 msgid "Export Data"
