@@ -1,8 +1,8 @@
 FROM alpine:3.13 as base
 
 # GitHub source
-ARG repository="https://github.com/inventree/InvenTree.git"
-ARG branch="master"
+ARG repository="https://github.com/sfabris/InvenTree.git"
+ARG branch="old"
 
 # Optionally specify a particular tag to checkout
 ARG tag=""
